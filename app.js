@@ -12,12 +12,12 @@ app.use(express.static("public"));
 
 mongoose.connect("mongodb://127.0.0.1:27017/QuizDB")
 
-const questionSchema = {
+const quizSchema = {
     question: String,
     answer: String
 }
 
-const Question = mongoose.model("Question", questionSchema)
+const Quiz = mongoose.model("Quiz", quizSchema)
 
 app.get("/", function (req, res) {
     res.render("Home")
@@ -27,17 +27,25 @@ app.get("/questions", function (req, res) {
     res.render("questions")
 })
 
+
 app.post("/questions", function (req, res) {
-    const question = new Question({
+    const quiz = new Quiz({
         question: req.body.newQuestion,
         answer: req.body.newAnswer
     })
-    question.save()
+    quiz.save()
     res.redirect("/");
 })
 
 app.get("/startQuiz", function (req, res) {
-    res.render("Started")
+    Quiz.find({})
+        .then((quiz) => {
+            res.render("Started", {
+                savedQuiz: quiz
+            })
+        }).catch((error) => {
+            console.log(error)
+        })
 })
 
 app.listen(4000, function () {
