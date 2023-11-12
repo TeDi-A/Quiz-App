@@ -1,16 +1,30 @@
 <%- include ("partials/header"); -%>
 
 
-<div class="container">
-    <%  savedQuiz.forEach(function(quizItem){ %>
-    
-    <h1><%= quizItem.question %></h1>
-    <h1><%= quizItem.answer %></h1>
-    
-    <% }) %>
+    <div class="container" data-quiz='<%= JSON.stringify(savedQuiz) %>'>
+        <h1 class="question-display">
+            <%= savedQuiz[currentQuizIndex].question %>
+        </h1>
+        <h1 class="answer-display">
+            <%= savedQuiz[currentQuizIndex].answer %>
+        </h1>
 
-    <button class="next-btn" >Next</button>
-</div>
+        <button class="next-btn" onclick="nextQuiz()">Next</button>
+
+        <script type="text/javascript">
+            let currentIndex = <%= currentQuizIndex %>;
+            const savedQuiz = JSON.parse(document.querySelector('.container').dataset.quiz);
+
+            function nextQuiz() {
+                currentIndex++;
+                if (currentIndex >= savedQuiz.length  ) {
+                    currentIndex = 0;
+                }
+                document.querySelector('.question-display').textContent =  savedQuiz[currentIndex].question ;
+                document.querySelector('.answer-display').textContent =  savedQuiz[currentIndex].answer ;
+            }
+        </script>
+    </div>
 
 
-<%- include("partials/footer") -%>
+    <%- include("partials/footer") -%>

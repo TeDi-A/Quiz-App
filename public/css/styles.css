@@ -56,8 +56,8 @@ h1 {
     padding: 1em 0;
 }
 
-.question-box,
-.answer-box {
+.question-insert,
+.answer-insert {
     width: 15rem;
     margin: 0.25em 0 1em 0;
 }
