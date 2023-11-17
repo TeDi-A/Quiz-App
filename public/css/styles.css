@@ -45,7 +45,8 @@ h1 {
 
 .start-btn,
 .add-btn,
-.next-btn {
+.next-btn,
+.show-btn {
     width: auto;
     padding: 1em;
 }
@@ -66,4 +67,8 @@ h1 {
     margin: 0 auto;
     padding: 0.5em;
     width: auto;
+}
+
+.hidden {
+    display: none
 }

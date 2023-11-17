@@ -25,11 +25,11 @@ app.get("/", function (req, res) {
     res.render("Home")
 })
 
-app.get("/questions", function (req, res) {
+app.get("/createQuiz", function (req, res) {
     res.render("questions")
 })
 
-app.post("/questions", function (req, res) {
+app.post("/createQuiz", function (req, res) {
     const quiz = new Quiz({
         question: req.body.newQuestion,
         answer: req.body.newAnswer

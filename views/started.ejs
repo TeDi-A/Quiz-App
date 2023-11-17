@@ -1,30 +1,44 @@
 <%- include ("partials/header"); -%>
 
-
     <div class="container" data-quiz='<%= JSON.stringify(savedQuiz) %>'>
         <h1 class="question-display">
             <%= savedQuiz[currentQuizIndex].question %>
         </h1>
-        <h1 class="answer-display">
+        <h1 class="answer-display hidden">
             <%= savedQuiz[currentQuizIndex].answer %>
         </h1>
 
-        <button class="next-btn" onclick="nextQuiz()">Next</button>
+        <button class="next-btn hidden" onclick="nextQuiz()">Next</button>
+        <button class="show-btn" onclick="showAns()">Answer</button>
 
         <script type="text/javascript">
+            let answerShow = document.querySelector(".answer-display")
+            let nextBtn = document.querySelector(".next-btn")
+            let showBtn = document.querySelector(".show-btn")
+
             let currentIndex = <%= currentQuizIndex %>;
             const savedQuiz = JSON.parse(document.querySelector('.container').dataset.quiz);
 
+
             function nextQuiz() {
                 currentIndex++;
-                if (currentIndex >= savedQuiz.length  ) {
+                nextBtn.classList.add("hidden")
+                answerShow.classList.add("hidden")
+                showBtn.classList.remove("hidden")
+
+                if (currentIndex >= savedQuiz.length) {
                     currentIndex = 0;
                 }
-                document.querySelector('.question-display').textContent =  savedQuiz[currentIndex].question ;
-                document.querySelector('.answer-display').textContent =  savedQuiz[currentIndex].answer ;
+
+                document.querySelector('.question-display').textContent = savedQuiz[currentIndex].question;
+                document.querySelector('.answer-display').textContent = savedQuiz[currentIndex].answer;
+            }
+
+            function showAns() {
+                answerShow.classList.remove("hidden")
+                nextBtn.classList.remove("hidden")
+                showBtn.classList.add("hidden")
             }
         </script>
     </div>
-
-
     <%- include("partials/footer") -%>
