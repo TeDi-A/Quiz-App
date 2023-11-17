@@ -53,6 +53,18 @@ app.get("/startQuiz", function (req, res) {
     
 })
 
+app.get("/editQuiz", function (req, res){
+    Quiz.find({})
+    .then((quiz) => {
+        res.render("edit", {
+            savedQuiz: quiz
+          
+        })
+    }).catch((error) => {
+        console.log(error)
+    })
+})
+
 app.listen(4000, function () {
     console.log("Server running on port 4000");
 });
