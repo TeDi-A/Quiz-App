@@ -2,7 +2,7 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color:lightslategray;
+    background-color: lightslategray;
 }
 
 h1 {
@@ -50,7 +50,7 @@ h3 {
 .edit-btn {
     grid-column: 2/3;
     grid-row: 2/3;
-    background-color:darkorange;
+    background-color: darkorange;
     color: white;
 }
 
@@ -66,7 +66,9 @@ h3 {
 .next-btn,
 .show-btn,
 .edit-btn,
-.single-edit-btn {
+.single-edit-btn,
+.new-edit,
+.overlay-close {
     width: auto;
     padding: 1em;
     border: none;
@@ -92,36 +94,78 @@ h3 {
 }
 
 .hidden {
-    display: none
+    display: none;
 }
 
-.quiz-start{
+.quiz-start {
     display: flex;
-    align-items: center; 
+    align-items: center;
     flex-direction: column;
 }
 
-.quiz-edit{
+.quiz-edit {
     display: flex;
     flex-direction: column;
-    align-items:  center;
+    align-items: center;
 }
 
-.single-edit{
+.single-edit {
     margin: 5px;
 }
 
-.quiz-question-edit{
+.quiz-question-edit {
     color: lime
 }
 
 .quiz-answer-edit {
-    color:white;
+    color: white;
 }
 
-.single-edit-btn{
+.single-edit-btn {
     border: 1px solid white;
-    background-color:rgb(86, 88, 89);
+    background-color: rgb(86, 88, 89);
     margin: 5px;
     cursor: pointer;
+}
+
+.overlay-open {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.750);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 1;
+}
+
+.overlay-open.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.edit-window {
+    padding: 20px;
+    z-index: 2;
+}
+
+.edit-window-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay-close {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.edit-control {
+    display: grid;
+    grid-template-columns: auto auto; /* Two equal columns */
+    gap: 10px;
 }
