@@ -2,7 +2,7 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: darkcyan;
+    background-color:lightslategray;
 }
 
 h1 {
@@ -65,9 +65,12 @@ h3 {
 .add-btn,
 .next-btn,
 .show-btn,
-.edit-btn {
+.edit-btn,
+.single-edit-btn {
     width: auto;
     padding: 1em;
+    border: none;
+    cursor: pointer;
 }
 
 .question-bank {
@@ -101,9 +104,24 @@ h3 {
 .quiz-edit{
     display: flex;
     flex-direction: column;
+    align-items:  center;
 }
 
 .single-edit{
-    border: 2px solid grayap;
     margin: 5px;
+}
+
+.quiz-question-edit{
+    color: lime
+}
+
+.quiz-answer-edit {
+    color:white;
+}
+
+.single-edit-btn{
+    border: 1px solid white;
+    background-color:rgb(86, 88, 89);
+    margin: 5px;
+    cursor: pointer;
 }
