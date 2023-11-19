@@ -5,7 +5,6 @@
     <div class="quiz-edit">
         <% savedQuiz.forEach(function(quiz){ %>
             <div class="single-edit">
-
                 <button class="single-edit-btn">
                     <div>
                         <h3 class="quiz-question-edit">
@@ -23,7 +22,6 @@
             </div>
 
             <% }) %>
-
     </div>
 
 
@@ -80,11 +78,10 @@
                 const currentQuestion = document.querySelectorAll('.quiz-question-edit')[i].textContent;
                 const currentAnswer = document.querySelectorAll('.quiz-answer-edit')[i].textContent;
 
-                questionEditBox.value = currentQuestion.trim(); 
+                questionEditBox.value = currentQuestion.trim();
                 answerEditBox.value = currentAnswer.trim();
             });
         }
-
         closeOverlay.addEventListener("click", function () {
             openOverlay.classList.remove('active')
         })
@@ -94,8 +91,5 @@
     //2. make changes to quiz question or answer
     //3. Use MongoDB to set changes be quiz question matching ID of 1
 
-
     </script>
-
-
     <%- include("partials/footer") -%>

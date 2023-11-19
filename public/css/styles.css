@@ -16,7 +16,7 @@ h3 {
     color: white;
     margin: 0;
     padding: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .container {
@@ -106,19 +106,27 @@ h3 {
 .quiz-edit {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 50%;
 }
 
-.single-edit {
-    margin: 5px;
-}
 
 .quiz-question-edit {
-    color: lime
+    color: lime;
+    
 }
 
 .quiz-answer-edit {
     color: white;
+}
+
+.quiz-question-edit, 
+.quiz-answer-edit {
+    width: auto;
+    text-align: start; 
+}
+
+.single-edit {
+    display: flex;
 }
 
 .single-edit-btn {
@@ -126,6 +134,9 @@ h3 {
     background-color: rgb(86, 88, 89);
     margin: 5px;
     cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: start;
 }
 
 .overlay-open {
@@ -159,13 +170,8 @@ h3 {
     flex-direction: column;
 }
 
-.overlay-close {
-    margin: 0 auto;
-    width: 100%;
-}
-
-.edit-control {
-    display: grid;
-    grid-template-columns: auto auto; /* Two equal columns */
-    gap: 10px;
+.edit-controls{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
