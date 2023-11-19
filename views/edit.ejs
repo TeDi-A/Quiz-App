@@ -1,0 +1,101 @@
+<%- include("partials/header") -%>
+
+    <h1>Edit Quiz</h1>
+
+    <div class="quiz-edit">
+        <% savedQuiz.forEach(function(quiz){ %>
+            <div class="single-edit">
+
+                <button class="single-edit-btn">
+                    <div>
+                        <h3 class="quiz-question-edit">
+                            <%=quiz.question %>
+                        </h3>
+                        <h3 class="quiz-answer-edit">
+                            <%=quiz.answer %>
+                        </h3>
+                    </div>
+                </button>
+                <div class="edit-controls">
+                    <button class="pencil make-edit hidden"><box-icon name='pencil'></box-icon></button>
+                    <button class="trash make-edit hidden"><box-icon name='trash' color='#000000'></box-icon></button>
+                </div>
+            </div>
+
+            <% }) %>
+
+    </div>
+
+
+    <div class="overlay-open">
+        <div class="edit-window">
+            <h1>Make An Edit</h1>
+            <form>
+                <div class="edit-window-content">
+                    <label>Question</label>
+                    <input class="question-edit-box" type="text" name="" placeholder="Edit question">
+                    <label>Answer</label>
+                    <textarea class="answer-edit-box" name="" rows="4" cols="30" placeholder="Edit answer"></textarea>
+
+                    <button class="overlay-close" type="submit" name="button">Done</button>
+                </div>
+        </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+
+        const questionForEdit = document.querySelector('.quiz-question-edit')
+        const answerForEdit = document.querySelector('.quiz-answer-edit')
+
+        const questionEditBox = document.querySelector('.question-edit-box')
+        const answerEditBox = document.querySelector('.answer-edit-box')
+
+        const singleEdits = document.querySelectorAll('.single-edit');
+
+        const delBtn = document.querySelector('.trash')
+        const modBtn = document.querySelectorAll('.pencil')
+
+        const openOverlay = document.querySelector('.overlay-open')
+        const closeOverlay = document.querySelector('.overlay-close')
+
+        singleEdits.forEach(function (quizBtn) {
+            quizBtn.addEventListener("click", function () {
+                const editBtns = this.querySelectorAll('.make-edit');
+                editBtns.forEach(btn => btn.classList.toggle('hidden'));
+
+                // Hide buttons for other items
+                singleEdits.forEach(item => {
+                    if (item !== quizBtn) {
+                        const otherBtns = item.querySelectorAll('.make-edit')
+                        otherBtns.forEach(btn => btn.classList.add('hidden'));
+                    }
+                });
+            });
+        });
+
+        for (let i = 0; i < modBtn.length; i++) {
+            modBtn[i].addEventListener("click", function () {
+                openOverlay.classList.add('active');
+
+                const currentQuestion = document.querySelectorAll('.quiz-question-edit')[i].textContent;
+                const currentAnswer = document.querySelectorAll('.quiz-answer-edit')[i].textContent;
+
+                questionEditBox.value = currentQuestion.trim(); 
+                answerEditBox.value = currentAnswer.trim();
+            });
+        }
+
+        closeOverlay.addEventListener("click", function () {
+            openOverlay.classList.remove('active')
+        })
+
+
+    //1. identify target quiz (preferably by its ID)
+    //2. make changes to quiz question or answer
+    //3. Use MongoDB to set changes be quiz question matching ID of 1
+
+
+    </script>
+
+
+    <%- include("partials/footer") -%>
