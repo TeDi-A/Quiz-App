@@ -38,8 +38,6 @@ app.post("/createQuiz", function (req, res) {
 })
 
 app.get("/startQuiz", function (req, res) {
-    const quizID = req.params.id
-
     Quiz.find({})
         .then((quiz) => {
             res.render("Started", {
@@ -49,21 +47,60 @@ app.get("/startQuiz", function (req, res) {
         }).catch((error) => {
             console.log(error)
         })
-    
 })
 
-app.get("/editQuiz", function (req, res){
+app.get("/editQuiz", function (req, res) {
     Quiz.find({})
-    .then((quiz) => {
-        res.render("edit", {
-            savedQuiz: quiz
-          
+        .then((quiz) => {
+            res.render("edit", {
+                savedQuiz: quiz
+            })
+        }).catch((error) => {
+            console.log(error)
         })
-    }).catch((error) => {
-        console.log(error)
-    })
 })
+
+app.get('/edit/:id', async (req, res) => {
+    try {
+        const quizId = req.params.id; // Assuming the ID is passed as a route parameter
+        const quiz = await Quiz.findById(quizId); // Fetch the quiz item from MongoDB
+        res.render('editQuizID', { quiz }); // Render the edit form with the quiz details
+    } catch (error) {
+        console.log(error);
+        res.redirect('/'); // Redirect  to handle errors
+    }
+});
+
+app.post("/completeEdit", async function (req, res) { //< Mark as async
+    const quizId = req.body.id; //< change to this
+    const editedQuestion = req.body.editQuestion;
+    const editedAnswer = req.body.editAnswer;
+ 
+    console.log(editedQuestion, editedAnswer)
+    try {
+       const updatedResult = await Quiz.findByIdAndUpdate(
+          quizId,
+          {
+             question: editedQuestion,
+             answer: editedAnswer
+          },
+          { new: true }
+       );
+       if (updatedResult) {
+          console.log("Quiz updated:", updatedResult);
+          res.redirect('/');
+       } else {
+          console.log("Quiz not found.", quizId);
+          res.redirect('/');
+       }
+    } catch (error) {
+       console.log(error);
+       res.redirect('/');
+    }
+ });
 
 app.listen(4000, function () {
     console.log("Server running on port 4000");
 });
+
+

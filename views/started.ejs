@@ -1,15 +1,65 @@
 <%- include ("partials/header"); -%>
 
     <div class="quiz-start" data-quiz='<%= JSON.stringify(savedQuiz) %>'>
+
         <h1 class="question-display">
             <%= savedQuiz[currentQuizIndex].question %>
         </h1>
-        <h1 class="answer-display hidden">
+        <h1 class="answer-display">
             <%= savedQuiz[currentQuizIndex].answer %>
         </h1>
 
-        <button class="next-btn hidden" onclick="nextQuiz()">Next</button>
-        <button class="show-btn" onclick="showAns()">Answer</button>
     </div>
+    <div class="quiz-start-btns">
+        <button class="show-btn" onclick="prevQuiz()">Previous</button>
+        <button class="show-btn" onclick="showAns()">Answer</button>
+        <button class="next-btn" onclick="nextQuiz()">Next</button>
+    </div>
+
+    <script>
+        let answerShow = document.querySelector(".answer-display")
+        let nextBtn = document.querySelector(".next-btn")
+        let showBtn = document.querySelector(".show-btn")
+
+        let currentIndex = <%= currentQuizIndex %>;
+        const savedQuiz = JSON.parse(document.querySelector('.quiz-start').dataset.quiz);
+
+
+        function nextQuiz() {
+            currentIndex++;
+            answerShow.classList.remove("show-answer")
+            answerShow.classList.add("exiting");
+            showBtn.classList.remove("hidden")
+
+            if (currentIndex >= savedQuiz.length) {
+                currentIndex = 0;
+            }
+
+            document.querySelector('.question-display').textContent = savedQuiz[currentIndex].question;
+            document.querySelector('.answer-display').textContent = savedQuiz[currentIndex].answer;
+        }
+
+        function prevQuiz() {
+            currentIndex--;
+            answerShow.classList.remove("show-answer")
+            answerShow.classList.add("exiting");
+            showBtn.classList.remove("hidden")
+
+            if (currentIndex >= savedQuiz.length) {
+                currentIndex = 0;
+            }
+
+            document.querySelector('.question-display').textContent = savedQuiz[currentIndex].question;
+            document.querySelector('.answer-display').textContent = savedQuiz[currentIndex].answer;
+        }
+
+        function showAns() {
+            answerShow.classList.toggle("show-answer")
+            answerShow.classList.remove("exiting");
+            // nextBtn.classList.remove("hidden")
+            showBtn.classList.toggle("hidden")
+        }
+    </script>
+
 
     <%- include("partials/footer") -%>

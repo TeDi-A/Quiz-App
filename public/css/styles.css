@@ -71,6 +71,7 @@ h3 {
 .overlay-close {
     width: auto;
     padding: 1em;
+    margin: 1em;
     border: none;
     cursor: pointer;
 }
@@ -93,14 +94,15 @@ h3 {
     width: auto;
 }
 
-.hidden {
-    display: none;
-}
-
 .quiz-start {
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+.quiz-start-btns {
+    display: flex;
+    flex-direction: row;
 }
 
 .quiz-edit {
@@ -109,20 +111,18 @@ h3 {
     width: 50%;
 }
 
-
 .quiz-question-edit {
     color: lime;
-    
 }
 
 .quiz-answer-edit {
     color: white;
 }
 
-.quiz-question-edit, 
+.quiz-question-edit,
 .quiz-answer-edit {
     width: auto;
-    text-align: start; 
+    text-align: start;
 }
 
 .single-edit {
@@ -139,27 +139,6 @@ h3 {
     justify-content: start;
 }
 
-.overlay-open {
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.750);
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
-    z-index: 1;
-}
-
-.overlay-open.active {
-    opacity: 1;
-    visibility: visible;
-}
-
 .edit-window {
     padding: 20px;
     z-index: 2;
@@ -170,8 +149,46 @@ h3 {
     flex-direction: column;
 }
 
-.edit-controls{
+.edit-controls {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+
+.question-display {
+    background-color: darkolivegreen;
+    width: 450px;
+    height: 300px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.next-btn.hidden {
+    display: none;
+}
+
+.answer-display {
+    position: absolute;
+    background-color: springgreen;
+    width: 450px;
+    height: 0px;
+    opacity: 0;
+    transition: opacity 0.25s, height 0.5s;
+}
+
+.answer-display.show-answer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 1;
+    height: 300px;
+}
+
+.answer-display.exiting {
+    transition: none; /* Remove transition for exiting */
+    height: 0px;
+    opacity: 0;
 }
