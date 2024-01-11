@@ -1,6 +1,6 @@
 <%- include("partials/header") -%>
 
-    <h1>Edit Quiz</h1>
+    <h1>All Quiz</h1>
 
     <div class="quiz-edit">
         <% savedQuiz.forEach(function(savedQuizItem) { %>
@@ -17,9 +17,9 @@
                 </button>
 
                 <div class="edit-controls">
-                    <a href="/edit/<%= savedQuizItem._id %>"><button class="pencil make-edit hidden"><box-icon
+                    <a href="/viewquiz/edit/<%= savedQuizItem._id %>"><button class="pencil make-edit hidden"><box-icon
                                 name='pencil'></box-icon></button></a>
-                    <a href="/delete/<%= savedQuizItem._id %>"><button class="trash make-edit hidden"><box-icon name='trash' color='#000000'></box-icon></button></a>
+                    <a href="/viewquiz/delete/<%= savedQuizItem._id %>"><button class="trash make-edit hidden"><box-icon name='trash' color='#000000'></box-icon></button></a>
                 </div>
 
             </div>

@@ -24,11 +24,11 @@ app.get("/", function (req, res) {
     res.render("Home")
 })
 
-app.get("/createQuiz", function (req, res) {
+app.get("/createquiz", function (req, res) {
     res.render("createQuiz")
 })
 
-app.post("/createQuiz", function (req, res) {
+app.post("/createquiz", function (req, res) {
     const quiz = new Quiz({
         question: req.body.newQuestion,
         answer: req.body.newAnswer
@@ -37,7 +37,7 @@ app.post("/createQuiz", function (req, res) {
     res.redirect("/");
 })
 
-app.get("/startQuiz", function (req, res) {
+app.get("/startquiz", function (req, res) {
     Quiz.find({})
         .then((quiz) => {
             res.render("Started", {
@@ -49,10 +49,10 @@ app.get("/startQuiz", function (req, res) {
         })
 })
 
-app.get("/editQuiz", function (req, res) {
+app.get("/viewquiz", function (req, res) {
     Quiz.find({})
         .then((quiz) => {
-            res.render("edit", {
+            res.render("viewQuiz", {
                 savedQuiz: quiz
             })
         }).catch((error) => {
@@ -60,7 +60,7 @@ app.get("/editQuiz", function (req, res) {
         })
 })
 
-app.get('/edit/:id', async (req, res) => {
+app.get('/viewquiz/edit/:id', async (req, res) => {
     try {
         const quizId = req.params.id; 
         const quiz = await Quiz.findById(quizId); 
@@ -71,7 +71,7 @@ app.get('/edit/:id', async (req, res) => {
     }
 });
 
-app.post("/completeEdit", async function (req, res) { 
+app.post("/completeedit", async function (req, res) { 
     const quizId = req.body.id;
     const editedQuestion = req.body.editQuestion;
     const editedAnswer = req.body.editAnswer;
@@ -99,7 +99,7 @@ app.post("/completeEdit", async function (req, res) {
 });
 
 
-app.get('/delete/:id', async (req, res) => {
+app.get('/viewquiz/delete/:id', async (req, res) => {
     try {
         const quizId = req.params.id;
         const quiz = await Quiz.findById(quizId); 
@@ -110,7 +110,7 @@ app.get('/delete/:id', async (req, res) => {
     }
 });
 
-app.post('/confirmDelete', async (req, res) => {
+app.post('/confirmdelete', async (req, res) => {
     try {
         const quizId = req.body.id
         let delDoc = await Quiz.findByIdAndDelete(quizId);
@@ -120,6 +120,9 @@ app.post('/confirmDelete', async (req, res) => {
         console.log(error)
         res.redirect('/')
     }
+})
+app.post('/denydelete', async (req, res) => {
+        res.redirect('/editquiz')
 })
 
 app.listen(4000, function () {
