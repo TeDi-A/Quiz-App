@@ -1,0 +1,40 @@
+<%- include("partials/header") -%>
+
+<h1>Make An Edit</h1>
+<form action="/completeEdit" method="post">
+    <div class="edit-window-content">
+      <label>Question</label>
+      <input class="question-edit-box" type="text" name="editQuestion" placeholder="Edit question" value="<%= quiz.question %>">
+
+      <label>Answer</label>
+      <textarea class="answer-edit-box" type="text" name="editAnswer" rows="4" cols="30" placeholder="Edit answer"><%= quiz.answer %></textarea>
+      
+      <input type="hidden" name="id" value="<%= quiz.id %>">
+      <button class="overlay-close" type="submit" name="button">Done</button>
+    </div>
+  </form>
+
+<script type="text/javascript">
+
+    const questionEditBox = document.querySelector('.question-edit-box')
+    const answerEditBox = document.querySelector('.answer-edit-box')
+
+    const singleEdits = document.querySelectorAll('.single-edit');
+
+    singleEdits.forEach(function (quizBtn) {
+        quizBtn.addEventListener("click", function () {
+            const editBtns = this.querySelectorAll('.make-edit');
+            editBtns.forEach(btn => btn.classList.toggle('hidden'));
+
+            // Hide buttons for other items
+            singleEdits.forEach(item => {
+                if (item !== quizBtn) {
+                    const otherBtns = item.querySelectorAll('.make-edit')
+                    otherBtns.forEach(btn => btn.classList.add('hidden'));
+                }
+            });
+        });
+    });
+</script>
+
+<%- include("partials/footer") -%>

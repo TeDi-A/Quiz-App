@@ -25,7 +25,7 @@ app.get("/", function (req, res) {
 })
 
 app.get("/createQuiz", function (req, res) {
-    res.render("questions")
+    res.render("createQuiz")
 })
 
 app.post("/createQuiz", function (req, res) {
@@ -62,45 +62,66 @@ app.get("/editQuiz", function (req, res) {
 
 app.get('/edit/:id', async (req, res) => {
     try {
-        const quizId = req.params.id; // Assuming the ID is passed as a route parameter
-        const quiz = await Quiz.findById(quizId); // Fetch the quiz item from MongoDB
-        res.render('editQuizID', { quiz }); // Render the edit form with the quiz details
+        const quizId = req.params.id; 
+        const quiz = await Quiz.findById(quizId); 
+        res.render('editQuizID', { quiz }); 
     } catch (error) {
         console.log(error);
-        res.redirect('/'); // Redirect  to handle errors
+        res.redirect('/'); 
     }
 });
 
-app.post("/completeEdit", async function (req, res) { //< Mark as async
-    const quizId = req.body.id; //< change to this
+app.post("/completeEdit", async function (req, res) { 
+    const quizId = req.body.id;
     const editedQuestion = req.body.editQuestion;
     const editedAnswer = req.body.editAnswer;
- 
     console.log(editedQuestion, editedAnswer)
     try {
-       const updatedResult = await Quiz.findByIdAndUpdate(
-          quizId,
-          {
-             question: editedQuestion,
-             answer: editedAnswer
-          },
-          { new: true }
-       );
-       if (updatedResult) {
-          console.log("Quiz updated:", updatedResult);
-          res.redirect('/');
-       } else {
-          console.log("Quiz not found.", quizId);
-          res.redirect('/');
-       }
+        const updatedResult = await Quiz.findByIdAndUpdate(
+            quizId,
+            {
+                question: editedQuestion,
+                answer: editedAnswer
+            },
+            { new: true }
+        );
+        if (updatedResult) {
+            console.log("Quiz updated:", updatedResult);
+            res.redirect('/');
+        } else {
+            console.log("Quiz not found.", quizId);
+            res.redirect('/');
+        }
     } catch (error) {
-       console.log(error);
-       res.redirect('/');
+        console.log(error);
+        res.redirect('/');
     }
- });
+});
+
+
+app.get('/delete/:id', async (req, res) => {
+    try {
+        const quizId = req.params.id;
+        const quiz = await Quiz.findById(quizId); 
+        res.render('deleteQuizID', { quiz }); 
+    } catch (error) {
+        console.log(error);
+        res.redirect('/');
+    }
+});
+
+app.post('/confirmDelete', async (req, res) => {
+    try {
+        const quizId = req.body.id
+        let delDoc = await Quiz.findByIdAndDelete(quizId);
+        console.log("Quiz Deleted:", delDoc)
+        res.redirect('/editQuiz')
+    } catch (error) {
+        console.log(error)
+        res.redirect('/')
+    }
+})
 
 app.listen(4000, function () {
     console.log("Server running on port 4000");
 });
-
-
