@@ -1,0 +1,21 @@
+<%- include("partials/header"); -%>
+
+
+
+        <h1>Create Quiz</h1>
+
+        <form class="" action="/createQuiz" method="post">
+            <div class="question-bank">
+                <label>Question</label>
+                <input class="question-insert" type="text" name="newQuestion" placeholder="Input question">
+                <label>Answer</label>
+                <textarea class="answer-insert" name="newAnswer" rows="4" cols="30" placeholder="Input question"></textarea>
+
+                <button class="create-btn" type="submit" name="button" >Add</button>
+            </div>
+           
+        </form>
+
+        <a href="/"><button class="return-home">Back Home</button></a>
+
+    <%- include("partials/footer") -%>

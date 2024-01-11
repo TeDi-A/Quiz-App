@@ -1,0 +1,14 @@
+<%- include("partials/header") -%>
+
+<h1>Delete this Quiz</h1>
+<form action="/confirmDelete" method="post">
+    <button>Yes</button>
+    <input type="hidden" name="id" value="<%= quiz.id %>">
+</form>
+
+<form action="denyDelete">
+    <button>No</button>
+    <input type="hidden" name="id" value="<%= quiz.id %>">
+</form>
+
+<%- include("partials/footer") -%>
