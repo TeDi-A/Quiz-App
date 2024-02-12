@@ -131,7 +131,9 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => { console.log(`Server is running on port ${PORT}`); });
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 
 // app.listen(4000, function () {
 //     console.log("Server running on port 4000");
