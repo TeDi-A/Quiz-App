@@ -62,16 +62,16 @@ app.get("/viewquiz", function (req, res) {
 
 app.get('/viewquiz/edit/:id', async (req, res) => {
     try {
-        const quizId = req.params.id; 
-        const quiz = await Quiz.findById(quizId); 
-        res.render('editQuizID', { quiz }); 
+        const quizId = req.params.id;
+        const quiz = await Quiz.findById(quizId);
+        res.render('editQuizID', { quiz });
     } catch (error) {
         console.log(error);
-        res.redirect('/'); 
+        res.redirect('/');
     }
 });
 
-app.post("/completeedit", async function (req, res) { 
+app.post("/completeedit", async function (req, res) {
     const quizId = req.body.id;
     const editedQuestion = req.body.editQuestion;
     const editedAnswer = req.body.editAnswer;
@@ -102,8 +102,8 @@ app.post("/completeedit", async function (req, res) {
 app.get('/viewquiz/delete/:id', async (req, res) => {
     try {
         const quizId = req.params.id;
-        const quiz = await Quiz.findById(quizId); 
-        res.render('deleteQuizID', { quiz }); 
+        const quiz = await Quiz.findById(quizId);
+        res.render('deleteQuizID', { quiz });
     } catch (error) {
         console.log(error);
         res.redirect('/');
@@ -122,9 +122,19 @@ app.post('/confirmdelete', async (req, res) => {
     }
 })
 app.post('/denydelete', async (req, res) => {
-        res.redirect('/editquiz')
+    res.redirect('/editquiz')
 })
 
-app.listen(4000, function () {
-    console.log("Server running on port 4000");
+app.get("/", (req, res) => {
+    res.send("Express on Vercel");
 });
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => { console.log(`Server is running on port ${PORT}`); });
+
+// app.listen(4000, function () {
+//     console.log("Server running on port 4000");
+// });
+
+module.exports = app
